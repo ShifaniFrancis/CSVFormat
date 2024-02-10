@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serviceablity Checker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 60px; /* Add padding to body to prevent the fixed navbar from overlapping content */
+        }
+
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #007bff; /* Change to the desired background color */
+            color: #ffffff; /* Change to the desired text color */
+            padding: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .logo-img {
+            max-height: 40px; /* Adjust the max-height according to your design */
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-header">
+        <img src="{{ url_for('static', filename='ondc_logo.png') }}" alt="ONDC Logo" class="logo-img">
+    </div>
+            <!-- Pincode Search Result -->
+            {% if result is not none %}
+            <div class="mt-4">
+                {% if result == 'found' %}
+                    <h3 style="color: green;">Pincode is found!</h3>
+                {% else %}
+                    {% if result|length > 0 %}
+                        <ul>
+                            <h4 style="color: green;">The available merchant IDs </h4>
+                            {% for item in result %}
+                                <li>{{ item }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <h3 style="color: red;">Pincode not found.</h3>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        
+</body>
+</html>
